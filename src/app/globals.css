@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.9)),
+    url("/moviesbg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.moviebg {
+  background-color: rgba(26, 29, 41, .9);
+}
+
+.moviesbg {
+  background-color: rgb(26, 29, 41);
+  height: auto;
+}
