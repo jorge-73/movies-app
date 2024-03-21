@@ -49,7 +49,7 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        <Link href={"https://github.com/"} target="_blank">
+        <Link href={"https://github.com/jorge-73/movies-app"} target="_blank">
           <FaGithub className=" text-3xl mx-5" />
         </Link>
       </div>
