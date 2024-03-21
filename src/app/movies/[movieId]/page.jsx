@@ -5,7 +5,7 @@ import Navbar from "@/components/nabvar/Navbar";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-const movieId = () => {
+const MovieId = () => {
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
 
@@ -31,4 +31,4 @@ const movieId = () => {
   );
 };
 
-export default movieId;
+export default MovieId;
