@@ -4,7 +4,7 @@ const LandingPage = () => {
   return (
     <div className="w-full md:w-6/12 px-4">
       <h2 className="text-4xl md:text-6xl text-white font-bold text-center md:text-left">
-        Get curated show and movie recommendations with Open AI
+        Discover personalized movie recommendations powered by Open AI
       </h2>
       <div className="flex justify-center gap-5 mt-5">
         <Link
