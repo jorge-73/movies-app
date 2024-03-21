@@ -11,7 +11,7 @@ const MovieDetails = ({ movie, urlImg }) => {
             src={urlImg}
             alt={movie.title}
             className="rounded-lg"
-            style={{ minWidth: "20rem", maxWidth: "100%" }}
+            style={{ minWidth: "16rem", maxWidth: "100%" }}
           />
         </div>
         <div className="flex flex-col justify-center text-white">
