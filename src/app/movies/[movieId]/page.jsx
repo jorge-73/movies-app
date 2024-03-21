@@ -2,11 +2,12 @@
 import { getMoviesRequest } from "@/api/axios";
 import MovieDetails from "@/components/movieDetails/MovieDetails";
 import Navbar from "@/components/nabvar/Navbar";
-import { useParams } from "next/navigation";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 const MovieId = () => {
-  const { movieId } = useParams();
+  const router = useRouter();
+  const { movieId } = router.query;
   const [movie, setMovie] = useState(null);
 
   useEffect(() => {
