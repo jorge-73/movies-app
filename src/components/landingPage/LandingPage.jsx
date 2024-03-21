@@ -8,7 +8,7 @@ const LandingPage = () => {
       </h2>
       <div className="flex justify-center gap-5 mt-5">
       <Link href={"/movies"} class="btn btn-secondary rounded-full font-bold px-10 opacity-80">View Movies</Link>
-      <button class="btn btn-neutral rounded-full font-bold px-10 opacity-80">Ghost</button>
+      <button className="btn btn-neutral rounded-full font-bold px-10 opacity-80">Ghost</button>
       </div>
     </div>
   );

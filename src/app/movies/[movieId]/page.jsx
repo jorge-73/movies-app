@@ -2,22 +2,21 @@
 import { getMoviesRequest } from "@/api/axios";
 import MovieDetails from "@/components/movieDetails/MovieDetails";
 import Navbar from "@/components/nabvar/Navbar";
-import { useRouter } from "next/router";
+import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const MovieId = () => {
-  const router = useRouter();
-  const { movieId } = router.query;
+  const params = useParams();
   const [movie, setMovie] = useState(null);
 
   useEffect(() => {
     const getMovie = async () => {
-      const res = await getMoviesRequest(`/movie/${movieId}`);
+      const res = await getMoviesRequest(`/movie/${params?.movieId}`);
       // console.log(res.data);
       setMovie(res.data);
     };
     getMovie();
-  }, [movieId]);
+  }, [params?.movieId]);
 
   if (!movie) return null;
   const urlImg = `https://image.tmdb.org/t/p/w300/${movie.poster_path}`;
