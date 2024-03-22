@@ -16,5 +16,6 @@ body {
 
 .moviesbg {
   background-color: rgb(26, 29, 41);
+  min-height: 100vh;
   height: auto;
 }
