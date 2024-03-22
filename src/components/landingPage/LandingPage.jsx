@@ -13,9 +13,9 @@ const LandingPage = () => {
         >
           View Movies
         </Link>
-        <button className="btn btn-neutral rounded-full font-bold px-10 opacity-80">
-          Ghost
-        </button>
+        <Link href={"https://www.themoviedb.org/"} target="_blank" className="btn btn-neutral rounded-full font-bold px-10 opacity-80">
+          The Movie DB
+        </Link>
       </div>
     </div>
   );

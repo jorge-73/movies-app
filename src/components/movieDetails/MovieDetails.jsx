@@ -1,8 +1,17 @@
 import { FaPlay } from "react-icons/fa";
 import { FaCircleInfo } from "react-icons/fa6";
 import Link from "next/link";
+import toast from "react-hot-toast";
 
 const MovieDetails = ({ movie, urlImg }) => {
+  const handleClickVideo = (video) => {
+    if (video) {
+      console.log(video);
+    } else {
+      toast.error("Video not Found");
+    }
+  };
+
   return (
     <div className="movie-principal bg-slate-800 mx-4 md:mx-8 p-6 md:p-4 rounded-lg shadow-lg">
       <div className="flex flex-col md:flex-row items-center md:justify-between">
@@ -27,8 +36,15 @@ const MovieDetails = ({ movie, urlImg }) => {
             <span className="font-bold">Date: </span>
             {movie.release_date}
           </p>
+          <p className="text-base md:text-lg mb-2">
+            <span className="font-bold">Duration: </span>
+            {movie.runtime}
+          </p>
           <div className="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-4">
-            <button className="flex items-center btn btn-neutral">
+            <button
+              className="flex items-center btn btn-neutral"
+              onClick={() => handleClickVideo(movie.video)}
+            >
               <i className="mr-2">
                 <FaPlay />
               </i>
