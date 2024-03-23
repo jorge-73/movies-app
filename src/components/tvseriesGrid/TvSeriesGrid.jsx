@@ -1,27 +1,27 @@
 "use client";
 import { useEffect, useState } from "react";
-import MoviesCard from "../moviesCard/MoviesCard";
+import TvSeriesCard from "../tvseriesCard/TvSeriesCard";
 import { getMoviesRequest } from "@/api/axios";
-import "./MoviesGrid.css";
+import "../moviesGrid/MoviesGrid.css";
 
-const MoviesGrid = () => {
-  const [allMovies, setAllMovies] = useState([]);
+const TvSeriesGrid = () => {
+  const [allSeries, setAllSeries] = useState([]);
   const [currentPage, setCurrentPage] = useState(() => {
     if (typeof window !== "undefined") {
-      return JSON.parse(localStorage.getItem("moviesPage") || 1);
+      return JSON.parse(localStorage.getItem("seriesPage") || 1);
     } else {
       return 1;
     }
   });
 
   useEffect(() => {
-    const getMovies = async () => {
-      const res = await getMoviesRequest(`/discover/movie?page=${currentPage}`);
-      setAllMovies(res?.data?.results);
-      localStorage.setItem("moviesPage", JSON.stringify(currentPage));
+    const getSeries = async () => {
+      const res = await getMoviesRequest(`/discover/tv?page=${currentPage}`);
+      setAllSeries(res?.data?.results);
+      localStorage.setItem("seriesPage", JSON.stringify(currentPage));
       // console.log(res?.data);
     };
-    getMovies();
+    getSeries();
   }, [currentPage]);
 
   const handlePrevPage = () => {
@@ -51,12 +51,12 @@ const MoviesGrid = () => {
         </button>
       </div>
       <div className="moviesGrid">
-        {allMovies.map((movie, idx) => (
-          <MoviesCard key={idx} movie={movie} />
+        {allSeries.map((serie, idx) => (
+          <TvSeriesCard key={idx} serie={serie} />
         ))}
       </div>
     </>
   );
 };
 
-export default MoviesGrid;
+export default TvSeriesGrid;

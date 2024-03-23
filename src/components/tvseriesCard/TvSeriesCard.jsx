@@ -2,15 +2,15 @@ import { useEffect } from "react";
 import Link from "next/link";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import "./MoviesCard.css";
+import "../moviesCard/MoviesCard.css";
 
-const MoviesCard = ({ movie }) => {
+const TvSeriesCard = ({ serie }) => {
+  const imgUrl = `https://image.tmdb.org/t/p/w300/${serie.poster_path}`;
+
   useEffect(() => {
     AOS.init();
   }, []);
 
-  const imgUrl = `https://image.tmdb.org/t/p/w300/${movie.poster_path}`;
-  
   return (
     <div
       className="movieCard"
@@ -19,11 +19,11 @@ const MoviesCard = ({ movie }) => {
       data-aos-duration="2000"
       data-aos-offset="0"
     >
-      <Link href={`/movies/${movie.id}`}>
-        <img className="movieImg" src={imgUrl} alt={movie.title} />
+      <Link href={`/tv/${serie.id}`}>
+        <img className="movieImg" src={imgUrl} alt={serie.name} />
       </Link>
     </div>
   );
 };
 
-export default MoviesCard;
+export default TvSeriesCard;

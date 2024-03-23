@@ -1,9 +1,9 @@
 "use client";
+import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
 import { getMoviesRequest } from "@/api/axios";
 import MovieDetails from "@/components/movieDetails/MovieDetails";
 import Navbar from "@/components/nabvar/Navbar";
-import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
 
 const MovieId = () => {
   const params = useParams();

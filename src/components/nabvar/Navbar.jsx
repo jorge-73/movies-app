@@ -32,10 +32,13 @@ const Navbar = () => {
             <li>
               <Link href={"/movies"}>Movies</Link>
             </li>
+            <li>
+              <Link href={"/tv"}>TV Series</Link>
+            </li>
           </ul>
         </div>
         <Link href={"/"} className="btn btn-ghost text-2xl">
-          Movies App
+          Movies & TV Series
         </Link>
       </div>
       <div className="navbar-center bg-black hidden lg:flex">
@@ -45,6 +48,9 @@ const Navbar = () => {
           </li>
           <li>
             <Link href={"/movies"}>Movies</Link>
+          </li>
+          <li>
+            <Link href={"/tv"}>TV Series</Link>
           </li>
         </ul>
       </div>

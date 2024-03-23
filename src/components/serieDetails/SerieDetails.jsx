@@ -7,21 +7,21 @@ import { FaCircleInfo } from "react-icons/fa6";
 import Link from "next/link";
 import toast from "react-hot-toast";
 
-const MovieDetails = ({ movie, urlImg }) => {
+const SerieDetails = ({ serie, urlImg }) => {
   const [videos, setVideos] = useState([]);
 
   useEffect(() => {
-    const getMovie = async () => {
-      const res = await getMoviesRequest(`/movie/${movie?.id}/videos`);
+    const getSerieVideo = async () => {
+      const res = await getMoviesRequest(`/tv/${serie?.id}/videos`);
       if (!res?.data) setVideos([]);
       setVideos(res?.data?.results);
     };
-    getMovie();
+    getSerieVideo();
   }, []);
 
   const handleClickVideo = () => {
     if (videos.length > 0) {
-      document.getElementById("my_modal").showModal();
+      document.getElementById("my_modal2").showModal();
     } else {
       toast.error("Videos not Found");
     }
@@ -30,31 +30,35 @@ const MovieDetails = ({ movie, urlImg }) => {
   return (
     <>
       <div className="bg-slate-800 mx-4 md:mx-8 p-6 md:p-4 rounded-lg shadow-lg">
-        <div className="flex flex-col md:flex-row items-center md:justify-between">
+        <div className="flex flex-col md:flex-row items-center">
           <div className="md:mr-8 mb-4 md:mb-0">
             <img
               src={urlImg}
-              alt={movie.title}
+              alt={serie.title}
               className="rounded-lg"
               style={{ minWidth: "16rem", maxWidth: "100%" }}
             />
           </div>
           <div className="flex flex-col justify-center text-white">
             <h3 className="text-2xl md:text-3xl font-bold mb-2 md:mb-4">
-              {movie.title}
+              {serie.name}
             </h3>
-            <p className="text-base md:text-lg mb-2">{movie.overview}</p>
+            <p className="text-base md:text-lg mb-2">{serie.overview}</p>
             <p className="text-base md:text-lg mb-2">
               <span className="font-bold">Genre: </span>
-              {movie.genres.map((genre) => genre.name).join(" / ")}
+              {serie.genres.map((genre) => genre.name).join(" / ")}
             </p>
             <p className="text-base md:text-lg mb-2">
-              <span className="font-bold">Date: </span>
-              {movie.release_date}
+              <span className="font-bold">First air Date: </span>
+              {serie.first_air_date}
             </p>
             <p className="text-base md:text-lg mb-2">
-              <span className="font-bold">Duration: </span>
-              {movie.runtime}
+              <span className="font-bold">Number of Seasons: </span>
+              {serie.number_of_seasons}
+            </p>
+            <p className="text-base md:text-lg mb-2">
+              <span className="font-bold">Number of Episodes: </span>
+              {serie.number_of_episodes}
             </p>
             <div className="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-4">
               <button
@@ -67,7 +71,7 @@ const MovieDetails = ({ movie, urlImg }) => {
                 Play
               </button>
               <Link
-                href={movie?.homepage}
+                href={serie?.homepage}
                 target="_blank"
                 className="flex items-center btn btn-neutral"
               >
@@ -80,7 +84,7 @@ const MovieDetails = ({ movie, urlImg }) => {
           </div>
         </div>
       </div>
-      <dialog id="my_modal" className="modal">
+      <dialog id="my_modal2" className="modal">
         <div className="modal-box w-11/12 max-w-7xl bg-neutral-950">
           <MovieVideoPlayer videos={videos} />
           <div className="modal-action">
@@ -95,4 +99,4 @@ const MovieDetails = ({ movie, urlImg }) => {
   );
 };
 
-export default MovieDetails;
+export default SerieDetails;
