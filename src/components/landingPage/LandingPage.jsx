@@ -7,7 +7,7 @@ const LandingPage = () => {
         Discover personalized movie and TV series recommendations powered by
         Open AI
       </h2>
-      <div className="flex justify-center gap-5 mt-5">
+      <div className="flex flex-col md:flex-row justify-center gap-5 mt-5">
         <Link
           href={"/movies"}
           className="btn btn-secondary rounded-full font-bold px-10 opacity-80"
