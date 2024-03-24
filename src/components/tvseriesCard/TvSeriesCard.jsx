@@ -5,7 +5,9 @@ import "aos/dist/aos.css";
 import "../moviesCard/MoviesCard.css";
 
 const TvSeriesCard = ({ serie }) => {
-  const imgUrl = `https://image.tmdb.org/t/p/w300/${serie.poster_path}`;
+  const imgUrl = serie.poster_path
+    ? `https://image.tmdb.org/t/p/w300/${serie.poster_path}`
+    : "/no-image.jpg";
 
   useEffect(() => {
     AOS.init();
