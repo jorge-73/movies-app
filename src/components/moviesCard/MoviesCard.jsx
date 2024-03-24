@@ -9,7 +9,9 @@ const MoviesCard = ({ movie }) => {
     AOS.init();
   }, []);
 
-  const imgUrl = `https://image.tmdb.org/t/p/w300/${movie.poster_path}`;
+  const imgUrl = movie.poster_path
+    ? `https://image.tmdb.org/t/p/w300/${movie.poster_path}`
+    : "/no-image.jpg";
   
   return (
     <div

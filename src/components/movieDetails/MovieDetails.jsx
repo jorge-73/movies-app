@@ -30,7 +30,7 @@ const MovieDetails = ({ movie, urlImg }) => {
   return (
     <>
       <div className="bg-slate-800 mx-4 md:mx-8 p-6 md:p-4 rounded-lg shadow-lg">
-        <div className="flex flex-col md:flex-row items-center md:justify-between">
+        <div className="flex flex-col md:flex-row items-center">
           <div className="md:mr-8 mb-4 md:mb-0">
             <img
               src={urlImg}
