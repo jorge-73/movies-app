@@ -24,7 +24,7 @@ export function MovieDetailsClient({ movie, videos }: MovieDetailsClientProps) {
     <main className="min-h-screen bg-cinema-black">
       <Navbar />
       
-      <div className="pt-20">
+      <div className="pt-20 pb-16">
         <div className="relative h-[70vh] min-h-[400px] w-full overflow-hidden">
           <Image
             src={getImageUrl(movie.backdrop_path, 'large', 'backdrop')}
