@@ -3,7 +3,7 @@
 import { memo, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { cn, getImageUrl, getTitle, getReleaseDate, formatRating } from '@/lib/utils';
+import { cn, getImageUrl, getTitle, getReleaseDate, formatRating, getMediaType } from '@/lib/utils';
 import { MediaItem, MediaType } from '@/lib/types';
 import { FaStar, FaPlay } from 'react-icons/fa';
 
@@ -45,7 +45,7 @@ function MediaCardComponent({
 
   return (
     <Link
-      href={`/${item.media_type}/${item.id}`}
+      href={`/${getMediaType(item)}/${item.id}`}
       className={cn(
         'group relative block overflow-hidden rounded-lg transition-all duration-300',
         'hover:scale-105 hover:z-20 hover:shadow-2xl hover:shadow-red-500/20',
