@@ -2,19 +2,21 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Navbar } from '@/components/layout/Navbar';
-import { getImageUrl, formatDate, getGenreNames } from '@/lib/utils';
-import { TVShow, Video } from '@/lib/types';
-import { FaPlay, FaStar, FaCalendar, FaFilm, FaPlus, FaThumbsUp, FaTimes } from 'react-icons/fa';
+import { MediaCard } from '@/components/media/MediaCard';
+import { getImageUrl, formatDate, formatRuntime, getGenreNames } from '@/lib/utils';
+import { Movie, Video } from '@/lib/types';
+import { FaPlay, FaStar, FaCalendar, FaClock, FaChevronLeft, FaPlus, FaThumbsUp, FaTimes } from 'react-icons/fa';
 
-interface TVShowDetailsClientProps {
-  serie: TVShow;
+interface MovieDetailsClientProps {
+  movie: Movie;
   videos: Video[];
 }
 
-export function TVShowDetailsClient({ serie, videos }: TVShowDetailsClientProps) {
+export function MovieDetailsClient({ movie, videos }: MovieDetailsClientProps) {
   const [showPlayer, setShowPlayer] = useState(false);
-  const [activeTab, setActiveTab] = useState<'overview' | 'seasons' | 'videos'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'cast' | 'videos'>('overview');
 
   const trailer = videos.find(v => v.type === 'Trailer' && v.official) || videos[0];
 
@@ -25,8 +27,8 @@ export function TVShowDetailsClient({ serie, videos }: TVShowDetailsClientProps)
       <div className="pt-20">
         <div className="relative h-[70vh] min-h-[400px] w-full overflow-hidden">
           <Image
-            src={getImageUrl(serie.backdrop_path, 'large', 'backdrop')}
-            alt={serie.name}
+            src={getImageUrl(movie.backdrop_path, 'large', 'backdrop')}
+            alt={movie.title}
             fill
             priority
             className="object-cover"
@@ -40,8 +42,8 @@ export function TVShowDetailsClient({ serie, videos }: TVShowDetailsClientProps)
             <div className="flex-shrink-0">
               <div className="relative w-[200px] md:w-[280px] rounded-lg overflow-hidden shadow-2xl">
                 <Image
-                  src={getImageUrl(serie.poster_path, 'large', 'poster')}
-                  alt={serie.name}
+                  src={getImageUrl(movie.poster_path, 'large', 'poster')}
+                  alt={movie.title}
                   width={280}
                   height={420}
                   className="w-full h-auto"
@@ -52,37 +54,34 @@ export function TVShowDetailsClient({ serie, videos }: TVShowDetailsClientProps)
 
             <div className="flex-1">
               <div className="flex items-center gap-4 mb-4">
-                <span className="bg-blue-600 text-white text-sm font-bold px-3 py-1 rounded">
-                  SERIE
+                <span className="bg-red-600 text-white text-sm font-bold px-3 py-1 rounded">
+                  PELÍCULA
                 </span>
-                {serie.first_air_date && (
-                  <span className="text-gray-300">{serie.first_air_date.split('-')[0]}</span>
+                {movie.release_date && (
+                  <span className="text-gray-300">{movie.release_date.split('-')[0]}</span>
                 )}
-                {serie.number_of_episodes && (
+                {movie.runtime && (
                   <span className="flex items-center gap-1 text-gray-300">
-                    <FaFilm />
-                    {serie.number_of_episodes} episodios
+                    <FaClock />
+                    {formatRuntime(movie.runtime)}
                   </span>
-                )}
-                {serie.number_of_seasons && (
-                  <span className="text-gray-400">{serie.number_of_seasons} temporadas</span>
                 )}
                 <span className="flex items-center gap-1 text-yellow-400">
                   <FaStar />
-                  {serie.vote_average?.toFixed(1)}
+                  {movie.vote_average?.toFixed(1)}
                 </span>
               </div>
 
               <h1 className="text-3xl md:text-5xl font-bold text-white mb-4">
-                {serie.name}
+                {movie.title}
               </h1>
 
-              {serie.tagline && (
-                <p className="text-gray-400 text-lg italic mb-4">&quot;{serie.tagline}&quot;</p>
+              {movie.tagline && (
+                <p className="text-gray-400 text-lg italic mb-4">&quot;{movie.tagline}&quot;</p>
               )}
 
               <div className="flex flex-wrap gap-2 mb-6">
-                {serie.genres?.map((genre) => (
+                {movie.genres?.map((genre) => (
                   <span
                     key={genre.id}
                     className="px-3 py-1 bg-gray-800 text-gray-300 rounded-full text-sm"
@@ -96,7 +95,7 @@ export function TVShowDetailsClient({ serie, videos }: TVShowDetailsClientProps)
                 {trailer ? (
                   <button
                     onClick={() => setShowPlayer(true)}
-                    className="flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-colors"
+                    className="flex items-center gap-2 px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg font-semibold transition-colors"
                   >
                     <FaPlay />
                     Ver Trailer
@@ -118,18 +117,18 @@ export function TVShowDetailsClient({ serie, videos }: TVShowDetailsClientProps)
 
               <div className="border-b border-gray-800 mb-6">
                 <div className="flex gap-6">
-                  {(['overview', 'seasons', 'videos'] as const).map((tab) => (
+                  {(['overview', 'cast', 'videos'] as const).map((tab) => (
                     <button
                       key={tab}
                       onClick={() => setActiveTab(tab)}
                       className={`pb-3 font-medium transition-colors ${
                         activeTab === tab
-                          ? 'text-white border-b-2 border-blue-600'
+                          ? 'text-white border-b-2 border-red-600'
                           : 'text-gray-400 hover:text-white'
                       }`}
                     >
                       {tab === 'overview' && 'Sinopsis'}
-                      {tab === 'seasons' && 'Temporadas'}
+                      {tab === 'cast' && 'Reparto'}
                       {tab === 'videos' && 'Videos'}
                     </button>
                   ))}
@@ -139,47 +138,27 @@ export function TVShowDetailsClient({ serie, videos }: TVShowDetailsClientProps)
               {activeTab === 'overview' && (
                 <div className="space-y-4">
                   <p className="text-gray-300 text-lg leading-relaxed">
-                    {serie.overview || 'No hay descripción disponible.'}
+                    {movie.overview || 'No hay descripción disponible.'}
                   </p>
                   
                   <div className="grid grid-cols-2 gap-4 mt-6">
                     <div>
                       <span className="text-gray-500 block mb-1">Estado</span>
-                      <span className="text-white">{serie.status}</span>
+                      <span className="text-white">{movie.status}</span>
                     </div>
                     <div>
-                      <span className="text-gray-500 block mb-1">Primera Emisión</span>
-                      <span className="text-white">{formatDate(serie.first_air_date)}</span>
+                      <span className="text-gray-500 block mb-1">Fecha de Estreno</span>
+                      <span className="text-white">{formatDate(movie.release_date)}</span>
                     </div>
-                    {serie.last_air_date && (
-                      <div>
-                        <span className="text-gray-500 block mb-1">Última Emisión</span>
-                        <span className="text-white">{formatDate(serie.last_air_date)}</span>
-                      </div>
-                    )}
+                    <div>
+                      <span className="text-gray-500 block mb-1">Duración</span>
+                      <span className="text-white">{formatRuntime(movie.runtime)}</span>
+                    </div>
                     <div>
                       <span className="text-gray-500 block mb-1">Idioma Original</span>
-                      <span className="text-white uppercase">{serie.original_language}</span>
+                      <span className="text-white uppercase">{movie.original_language}</span>
                     </div>
                   </div>
-                </div>
-              )}
-
-              {activeTab === 'seasons' && (
-                <div className="space-y-3">
-                  {serie.number_of_seasons ? (
-                    Array.from({ length: serie.number_of_seasons }, (_, i) => (
-                      <div
-                        key={i}
-                        className="flex items-center justify-between p-4 bg-gray-800 rounded-lg"
-                      >
-                        <span className="text-white font-medium">Temporada {i + 1}</span>
-                        <span className="text-gray-400">Ver episodios</span>
-                      </div>
-                    ))
-                  ) : (
-                    <p className="text-gray-400">No hay información de temporadas disponible.</p>
-                  )}
                 </div>
               )}
 
@@ -220,4 +199,4 @@ export function TVShowDetailsClient({ serie, videos }: TVShowDetailsClientProps)
   );
 }
 
-export default TVShowDetailsClient;
+export default MovieDetailsClient;

@@ -42,7 +42,7 @@ function HomeContent() {
         <MediaHero />
       </Suspense>
 
-      <div className="relative z-10 -mt-32 pb-16">
+      <div className="relative z-10 pb-16 bg-cinema-black">
         <section className="mb-12">
           <div className="container mx-auto px-4">
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-6 flex items-center gap-3">
