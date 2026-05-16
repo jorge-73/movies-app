@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { Toaster } from 'react-hot-toast';
+import { Footer } from '@/components/layout/Footer';
 import './globals.css';
 
 const inter = Inter({ 
@@ -66,8 +67,9 @@ export default function RootLayout({
         <link rel="preconnect" href="https://image.tmdb.org" />
         <link rel="dns-prefetch" href="https://image.tmdb.org" />
       </head>
-      <body className="font-sans bg-cinema-black text-white min-h-screen">
+      <body className="font-sans bg-cinema-black text-white min-h-screen flex flex-col">
         {children}
+        <Footer />
         <Toaster
           position="bottom-center"
           reverseOrder={false}
