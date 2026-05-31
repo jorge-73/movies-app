@@ -12,6 +12,7 @@ Aplicación web estilo Netflix para descubrir películas y series, construida co
 - **Secciones curadas** en la homepage: películas populares, series populares, mejores valoradas, próximos estrenos, en emisión
 - **Páginas de exploración** con pestañas para Películas (`/movies`) y Series (`/tv`) con scroll infinito
 - **Detalle de película** con backdrop, póster, metadatos, géneros, tráiler y contenido en pestañas (resumen / videos)
+- **Detalle de serie** con información de temporadas, episodios, cadenas de TV y tráiler
 - **Búsqueda global** desde la barra de navegación
 - **Diseño responsive** con menú hamburguesa en móvil y grids adaptativos (2–6 columnas)
 - **Skeletons** de carga para hero, tarjetas, grids y página de detalle
@@ -48,6 +49,9 @@ src/
 │   ├── page.tsx                  # Homepage
 │   ├── movies/page.tsx           # Exploración de películas
 │   ├── tv/page.tsx               # Exploración de series
+│   └── [tvId]/
+│       ├── page.tsx          # Server component (datos + metadata)
+│       └── TVShowDetailsClient.tsx  # Client component (UI interactiva)
 │   └── movie/[movieId]/
 │       ├── page.tsx              # Server component (datos + metadata)
 │       └── MovieDetailsClient.tsx # Client component (UI interactiva)
@@ -158,6 +162,7 @@ El proyecto se integra con la [API de The Movie Database (TMDB v3)](https://deve
 - [x] Homepage con hero carrusel y 6 secciones de contenido
 - [x] Páginas de exploración de películas y series con scroll infinito
 - [x] Página de detalle de película (híbrida server + client)
+- [x] Página de detalle de serie (híbrida server + client)
 - [x] Barra de navegación responsive con búsqueda
 - [x] Footer completo con enlaces y atribución
 - [x] Skeletons de carga para todos los componentes
@@ -168,7 +173,7 @@ El proyecto se integra con la [API de The Movie Database (TMDB v3)](https://deve
 
 ### 🚧 Pendiente
 
-- [ ] Página de detalle de serie (`/tvshow/[tvshowId]`)
+- [ ] Página de resultados de búsqueda (`/search`)
 - [ ] Página de resultados de búsqueda (`/search`)
 - [ ] Páginas de autenticación (`/login`, `/register`)
 - [ ] Stores de Zustand (`src/store/`)
