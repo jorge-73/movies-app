@@ -60,8 +60,11 @@ export function getTitle(item: { title?: string; name?: string }): string {
   return item.title || item.name || 'Sin título';
 }
 
-export function getMediaType(item: { media_type?: string }): 'movie' | 'tv' {
-  return item.media_type === 'tv' ? 'tv' : 'movie';
+export function getMediaType(item: { media_type?: string; name?: string; title?: string }): 'movie' | 'tv' {
+  if (item.media_type === 'tv') return 'tv';
+  if (item.media_type === 'movie') return 'movie';
+  if (item.name && !item.title) return 'tv';
+  return 'movie';
 }
 
 export function getReleaseDate(item: { release_date?: string; first_air_date?: string }): string {
