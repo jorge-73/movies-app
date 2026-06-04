@@ -16,7 +16,11 @@ export function TVShowDetailsClient({ show, videos }: TVShowDetailsClientProps) 
   const [showPlayer, setShowPlayer] = useState(false);
   const [activeTab, setActiveTab] = useState<'overview' | 'videos'>('overview');
 
-  const trailer = videos.find(v => v.type === 'Trailer' && v.official) || videos[0];
+  const trailer =
+    videos.find(v => v.type === 'Trailer' && v.official && v.iso_639_1 === 'en') ||
+    videos.find(v => v.type === 'Trailer' && v.iso_639_1 === 'en') ||
+    videos.find(v => v.type === 'Trailer' && v.official) ||
+    videos[0];
 
   const runtime = show.episode_run_time?.[0];
 
@@ -229,7 +233,7 @@ export function TVShowDetailsClient({ show, videos }: TVShowDetailsClientProps) 
               <FaTimes />
             </button>
             <iframe
-              src={`https://www.youtube.com/embed/${trailer.key}?autoplay=1`}
+              src={`https://www.youtube.com/embed/${trailer.key}?autoplay=1&cc_load_policy=1&cc_lang_pref=es`}
               className="w-full h-full rounded-lg"
               allow="autoplay; encrypted-media"
               allowFullScreen

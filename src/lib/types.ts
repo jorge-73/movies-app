@@ -101,6 +101,7 @@ export interface Video {
   site: string;
   type: string;
   official: boolean;
+  iso_639_1?: string;
   published_at: string;
 }
 

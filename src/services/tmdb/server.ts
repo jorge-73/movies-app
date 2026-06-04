@@ -75,7 +75,7 @@ export async function getTVShowById(id: string): Promise<TVShow> {
 
 export async function getMovieVideos(movieId: string) {
   const response = await fetch(
-    `${TMDB_BASE_URL}/movie/${movieId}/videos?language=es-ES`,
+    `${TMDB_BASE_URL}/movie/${movieId}/videos`,
     {
       headers: getHeaders(),
       next: { revalidate: 3600 },
@@ -91,7 +91,7 @@ export async function getMovieVideos(movieId: string) {
 
 export async function getTVShowVideos(tvId: string) {
   const response = await fetch(
-    `${TMDB_BASE_URL}/tv/${tvId}/videos?language=es-ES`,
+    `${TMDB_BASE_URL}/tv/${tvId}/videos`,
     {
       headers: getHeaders(),
       next: { revalidate: 3600 },

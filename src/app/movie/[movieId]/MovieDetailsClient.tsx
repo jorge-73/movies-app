@@ -18,7 +18,11 @@ export function MovieDetailsClient({ movie, videos }: MovieDetailsClientProps) {
   const [showPlayer, setShowPlayer] = useState(false);
   const [activeTab, setActiveTab] = useState<'overview' | 'cast' | 'videos'>('overview');
 
-  const trailer = videos.find(v => v.type === 'Trailer' && v.official) || videos[0];
+  const trailer =
+    videos.find(v => v.type === 'Trailer' && v.official && v.iso_639_1 === 'en') ||
+    videos.find(v => v.type === 'Trailer' && v.iso_639_1 === 'en') ||
+    videos.find(v => v.type === 'Trailer' && v.official) ||
+    videos[0];
 
   return (
     <main className="min-h-screen bg-cinema-black">
@@ -187,7 +191,7 @@ export function MovieDetailsClient({ movie, videos }: MovieDetailsClientProps) {
               <FaTimes />
             </button>
             <iframe
-              src={`https://www.youtube.com/embed/${trailer.key}?autoplay=1`}
+              src={`https://www.youtube.com/embed/${trailer.key}?autoplay=1&cc_load_policy=1&cc_lang_pref=es`}
               className="w-full h-full rounded-lg"
               allow="autoplay; encrypted-media"
               allowFullScreen

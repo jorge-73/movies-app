@@ -59,11 +59,19 @@ export function MediaHero({ className }: MediaHeroProps) {
         ? await tmdbClient.getMovieVideos(mediaId)
         : await tmdbClient.getTVShowVideos(mediaId);
       
-      const trailer = videos.results?.find(
-        (v: Video) => v.site === 'YouTube' && (v.type === 'Trailer' || v.type === 'Teaser') && v.official
-      ) || videos.results?.find(
-        (v: Video) => v.site === 'YouTube' && (v.type === 'Trailer' || v.type === 'Teaser')
-      );
+      const trailer =
+        videos.results?.find(
+          (v: Video) => v.site === 'YouTube' && (v.type === 'Trailer' || v.type === 'Teaser') && v.official && v.iso_639_1 === 'en'
+        ) ||
+        videos.results?.find(
+          (v: Video) => v.site === 'YouTube' && (v.type === 'Trailer' || v.type === 'Teaser') && v.iso_639_1 === 'en'
+        ) ||
+        videos.results?.find(
+          (v: Video) => v.site === 'YouTube' && (v.type === 'Trailer' || v.type === 'Teaser') && v.official
+        ) ||
+        videos.results?.find(
+          (v: Video) => v.site === 'YouTube' && (v.type === 'Trailer' || v.type === 'Teaser')
+        );
 
       if (trailer) {
         setTrailerKey(trailer.key);
@@ -229,7 +237,7 @@ export function MediaHero({ className }: MediaHeroProps) {
               <FaTimes />
             </button>
             <iframe
-              src={`https://www.youtube.com/embed/${trailerKey}?autoplay=1&rel=0`}
+              src={`https://www.youtube.com/embed/${trailerKey}?autoplay=1&rel=0&cc_load_policy=1&cc_lang_pref=es`}
               className="w-full h-full rounded-lg"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen

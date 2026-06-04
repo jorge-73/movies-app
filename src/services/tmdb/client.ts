@@ -154,16 +154,14 @@ export class TMDbClient {
 
   async getMovieVideos(movieId: number): Promise<MediaVideos> {
     const response = await this.client.get<MediaVideos>(
-      `/movie/${movieId}/videos`,
-      { params: this.buildParams() }
+      `/movie/${movieId}/videos`
     );
     return response.data;
   }
 
   async getTVShowVideos(tvId: number): Promise<MediaVideos> {
     const response = await this.client.get<MediaVideos>(
-      `/tv/${tvId}/videos`,
-      { params: this.buildParams() }
+      `/tv/${tvId}/videos`
     );
     return response.data;
   }
